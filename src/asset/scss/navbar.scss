@@ -1,0 +1,179 @@
+.row {
+  height: 78px !important;
+}
+input {
+  &:focus {
+    outline: none;
+  }
+}
+.header--wrapper {
+  background-color: #676b74;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  z-index: 99;
+
+  .logo-wrap {
+    flex: 0 0 250px;
+    max-width: 250px;
+    padding: 0 15px;
+
+    @media only screen and (max-width: 767px) {
+      flex: 0 0 calc(100% - 50px);
+      max-width: calc(100% - 150px);
+      padding-right: 15px;
+      justify-content: left;
+    }
+
+    .khetkhamar_logo {
+      margin: 0 auto;
+    }
+  }
+
+  .khetkhamar_logo {
+    img {
+      max-width: 150px;
+    }
+  }
+
+  .search--wrap {
+    flex: 0 0 calc(100% - 700px);
+    max-width: calc(100% - 390px);
+    padding-right: 15px;
+  }
+}
+
+// .hamburger-menu {
+//   line-height: 0;
+// }
+// .toggle-menu {
+//   background-color: transparent;
+//   border: 0;
+//   cursor: pointer;
+//   margin-left: auto;
+//   outline: 0;
+//   padding: 0;
+//   width: 25px;
+//   z-index: 50;
+
+//   i {
+//     background-color: #000;
+//     border-radius: 1000px;
+//     display: block;
+//     height: 2px;
+//     position: relative;
+//     width: 100%;
+//     transition: all 0.3s;
+
+//     + i {
+//       margin-top: 6px;
+//     }
+//   }
+
+//   &.open-sidebar {
+//     i {
+//       position: relative;
+
+//       &:nth-child(1) {
+//         top: 7px;
+//         transform: rotate(45deg);
+//       }
+
+//       &:nth-child(2) {
+//         opacity: 0;
+//       }
+
+//       &:nth-child(3) {
+//         top: -10px;
+//         transform: rotate(-45deg);
+//       }
+//     }
+//   }
+// }
+
+.search--box {
+  position: relative;
+
+  input {
+    border: 1px solid #ddd;
+    box-shadow: none;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 14px;
+    height: 48px;
+    padding: 0 35px 0 12px;
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin-left: 80px;
+
+    &:focus {
+      //   border-color: $primary-color;
+    }
+  }
+
+  button[type="submit"] {
+    background-color: #fff;
+    border: 0;
+    position: absolute;
+    right: 20px;
+    top: 7px;
+    z-index: 1;
+
+    svg {
+      width: 25px;
+      height: 25px;
+      fill: #7a7a7a;
+      stroke: #7a7a7a;
+      margin: 0 auto;
+    }
+  }
+}
+
+.nav-right {
+  width: 20%;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #fff;
+  .country {
+    font-weight: 400;
+    font-size: 18px;
+    @media only screen and (max-width: 767px) {
+      justify-content: right;
+    }
+  }
+  .cart-icon {
+    svg {
+      font-size: 20px;
+      @media only screen and (max-width: 767px) {
+        display: none;
+      }
+    }
+    // span {
+    //   font-weight: 400;
+    //   font-size: 18px;
+    //   text-transform: capitalize;
+    //   padding: 4px 10px;
+    //   text-align: center;
+    //   margin-top: 5px;
+    //   @media only screen and (max-width: 767px) {
+    //     display: none;
+    //   }
+    // }
+  }
+}
+.user {
+  svg {
+    @media only screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+  .user-text {
+    font-weight: 400;
+    text-align: center;
+    font-size: 18px;
+    margin-left: 10px;
+    text-transform: capitalize;
+    @media only screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+}

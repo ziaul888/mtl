@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffcet } from "react";
 import "../../asset/scss/navbar.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getProducts } from "../../feature/ProductSlice";
 
 const Navbar = () => {
   const cart = useSelector((state) => state.carts.cartItem);
-  console.log(cart);
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getProducts(query));
+    console.log(query);
+  };
 
   return (
     <>
@@ -20,35 +32,46 @@ const Navbar = () => {
             </div>
 
             <div className="search--wrap d-none d-md-block d-sm-none ">
-              <div className="search--box d-flex">
-                <input
-                  className="searchBox"
-                  type="text"
-                  placeholder="Search "
-                />
-                <button type="submit">
-                  <svg
-                    className="search"
-                    version="1.1"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 100 100"
-                    data-reactid=".b9pytvtuci.4.0.0.0.3.0.2.0"
-                  >
-                    <path
-                      d="M44.5,78.5c-18.8,0-34-15.3-34-34s15.3-34,34-34s34,15.3,34,34S63.3,78.5,44.5,78.5z M44.5,18.1  C30,18.1,18.2,30,18.2,44.5S30,70.8,44.5,70.8S70.9,59,70.9,44.5S59,18.1,44.5,18.1z"
-                      data-reactid=".b9pytvtuci.4.0.0.0.3.0.2.0.0"
-                    ></path>
-                    <path
-                      d="M87.2,91c-1,0-2-0.4-2.7-1.1L63.1,68.5c-1.5-1.5-1.5-3.9,0-5.4s3.9-1.5,5.4,0l21.3,21.3  c1.5,1.5,1.5,3.9,0,5.4C89.2,90.6,88.2,91,87.2,91z"
-                      data-reactid=".b9pytvtuci.4.0.0.0.3.0.2.0.1"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
+              <form onSubmit={handleSubmit}>
+                <div className="search--box d-flex">
+                  <input
+                    className="searchBox"
+                    type="text"
+                    placeholder="Search "
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                  />
+                  <button type="submit">
+                    <svg
+                      className="search"
+                      version="1.1"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 100 100"
+                      data-reactid=".b9pytvtuci.4.0.0.0.3.0.2.0"
+                    >
+                      <path
+                        d="M44.5,78.5c-18.8,0-34-15.3-34-34s15.3-34,34-34s34,15.3,34,34S63.3,78.5,44.5,78.5z M44.5,18.1  C30,18.1,18.2,30,18.2,44.5S30,70.8,44.5,70.8S70.9,59,70.9,44.5S59,18.1,44.5,18.1z"
+                        data-reactid=".b9pytvtuci.4.0.0.0.3.0.2.0.0"
+                      ></path>
+                      <path
+                        d="M87.2,91c-1,0-2-0.4-2.7-1.1L63.1,68.5c-1.5-1.5-1.5-3.9,0-5.4s3.9-1.5,5.4,0l21.3,21.3  c1.5,1.5,1.5,3.9,0,5.4C89.2,90.6,88.2,91,87.2,91z"
+                        data-reactid=".b9pytvtuci.4.0.0.0.3.0.2.0.1"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </form>
             </div>
             <div className="nav-right text-center d-flex">
-              <div className="cart-icon d-md-none d-lg-block">
+              <div
+                className="cart-icon d-md-none d-lg-block"
+                onClick={() =>
+                  reactLocalStorage.get("token") && cart.length > 0
+                    ? navigate("/cart")
+                    : navigate("/login")
+                }
+              >
                 <span className="mobile-shopping-wrap__cart_item d-flex align-items-center justify-content-center">
                   {cart.length}
                 </span>

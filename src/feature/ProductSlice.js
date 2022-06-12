@@ -8,12 +8,15 @@ const initialState = {
   error: "",
 };
 export const getProducts = createAsyncThunk("products/getProducts", () => {
-  return axiosInstance.get("/products").then((res) => console.log(res.data));
+  return axiosInstance.get("/products").then(({ data }) => data);
 });
 const productSlice = createSlice({
   name: "products",
   initialState,
   extraReducers: {
+    [getProducts.pending]: (state) => {
+      state.loading = true;
+    },
     [getProducts.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.products = payload;
@@ -25,9 +28,6 @@ const productSlice = createSlice({
       state.loading = true;
       state.products = [];
       state.error = payload.error.message;
-    },
-    [getProducts.pending]: (state) => {
-      state.loading = true;
     },
   },
 });

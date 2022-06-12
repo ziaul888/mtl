@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../asset/scss/product.scss";
-import axiosInstance from "../helper/axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getProducts } from "../feature/ProductSlice";
@@ -8,24 +7,10 @@ import { addToCart } from "../feature/cartSilce";
 import { Link } from "react-router-dom";
 
 const Product = () => {
-  // const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products.products);
 
   // console.log(products);
   const dispatch = useDispatch();
-
-  const [products, setProducts] = useState([]);
-  // getProduct///
-
-  const getProducts = () => {
-    axiosInstance
-      .get("products")
-      .then(({ data }) => {
-        setProducts(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   /// add to cart//
 
@@ -34,8 +19,7 @@ const Product = () => {
   };
 
   useEffect(() => {
-    // dispatch(getProducts());
-    getProducts();
+    dispatch(getProducts());
   }, []);
   return (
     <>

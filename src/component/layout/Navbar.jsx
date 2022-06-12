@@ -1,7 +1,12 @@
 import React from "react";
 import "../../asset/scss/navbar.scss";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const cart = useSelector((state) => state.carts.cartItem);
+  console.log(cart);
+
   return (
     <>
       <div className="header--wrapper position-fixed w-100">
@@ -44,7 +49,9 @@ const Navbar = () => {
             </div>
             <div className="nav-right text-center d-flex">
               <div className="cart-icon d-md-none d-lg-block">
-                <span className="mobile-shopping-wrap__cart_item d-flex align-items-center justify-content-center"></span>
+                <span className="mobile-shopping-wrap__cart_item d-flex align-items-center justify-content-center">
+                  {cart.length}
+                </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -71,7 +78,9 @@ const Navbar = () => {
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
                   />
                 </svg>
-                <span className="user-text">Login</span>
+                <Link to="/login">
+                  <span className="user-text">Login</span>
+                </Link>
               </div>
             </div>
           </div>

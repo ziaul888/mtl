@@ -1,8 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../asset/scss/login.scss";
+import axiosInstance from "../helper/axios";
+import { useForm } from "react-hook-form";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState,
+    formState: { isSubmitSuccessfull },
+  } = useForm({
+    validateCriteraMode: "all",
+    mode: "onChange",
+    defaultValues: { something: "anything" },
+  });
+
+  const onSubmit = (data) => {
+    axiosInstance
+      .post("/login", {
+        email: data.email,
+        password: data.password,
+      })
+      .then(({ data }) => {
+        console.log(data);
+        reactLocalStorage.set("token", data.accessToken);
+        if (reactLocalStorage.get("token")) {
+          navigate("/");
+        } else {
+          navigate("/login");
+        }
+      })
+      .catch((error) => {
+        alert("incorrect email or password");
+      });
+  };
+
+  useEffect(() => {
+    if (isSubmitSuccessfull) {
+      reset({
+        email: "",
+        password: "",
+      });
+    }
+  }, [formState, reset, isSubmitSuccessfull]);
+
   return (
     <section className="login-section">
       <div className="form-conatainer">
@@ -10,25 +56,27 @@ const Login = () => {
           <h1>Log In </h1>
         </div>
         <div className="form-block">
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-input">
               <input
                 type="email"
                 className="form-control"
                 name="email"
-                value=""
                 placeholder="Enter Your Email"
-                required
+                {...register("email", {
+                  required: true,
+                  pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/i,
+                })}
               />
             </div>
             <div className="form-input">
               <input
-                type="email"
+                type="password"
                 className="form-control"
-                name="email"
-                value=""
+                name="password"
                 placeholder="Enter Your Password"
                 required
+                {...register("password", { required: true })}
               />
             </div>
             <span className="forgot-pass">Forgot Password ?</span>

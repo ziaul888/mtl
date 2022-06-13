@@ -3,7 +3,7 @@ import "../asset/scss/product.scss";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getProducts } from "../feature/ProductReducer";
-import { addToCart } from "../feature/cartSilce";
+import { addToCart } from "../feature/cartReducer";
 import { Link } from "react-router-dom";
 
 const Product = () => {

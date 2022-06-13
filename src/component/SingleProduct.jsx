@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../helper/axios";
 import { useParams } from "react-router-dom";
 import "../asset/scss/singleproduct.scss";
-import { addToCart } from "../feature/cartSilce";
+import { addToCart } from "../feature/cartReducer";
 import { useDispatch } from "react-redux";
 
 const SingleProduct = () => {

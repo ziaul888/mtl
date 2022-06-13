@@ -1,11 +1,9 @@
 import React from "react";
 import "../asset/scss/cart.scss";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { removeItem } from "../feature/cartSilce";
+
 const Cart = () => {
   const carts = useSelector((state) => state.carts.cartItem);
-  const dispatch = useDispatch();
 
   return (
     <div className="cart-item">
@@ -50,12 +48,7 @@ const Cart = () => {
               </div>
 
               <div className="orderedProducts_remove ml-auto">
-                <i
-                  className="far fa-trash-alt"
-                  onClick={() => dispatch(removeItem(item.id))}
-                >
-                  Delete
-                </i>
+                <i className="far fa-trash-alt">Delete</i>
               </div>
             </div>
           </>

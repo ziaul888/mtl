@@ -1,13 +1,7 @@
 @import "./var.scss";
 .main-content {
   //width: 100%;
-  overflow-y: scroll;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 
-  .main-content::-webkit-scrollbar {
-    display: none;
-  }
   @media only screen and (max-width: 768px) {
     overflow-y: visible;
   }

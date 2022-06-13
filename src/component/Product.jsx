@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import "../asset/scss/product.scss";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getProducts } from "../feature/ProductSlice";
+import { getProducts } from "../feature/ProductReducer";
 import { addToCart } from "../feature/cartSilce";
 import { Link } from "react-router-dom";
 
 const Product = () => {
-  const products = useSelector((state) => state.products.products);
+  const { products } = useSelector((state) => state.products);
 
-  // console.log(products);
   const dispatch = useDispatch();
 
   /// add to cart//

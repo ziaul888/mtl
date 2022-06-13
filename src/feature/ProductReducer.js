@@ -22,9 +22,12 @@ const productReducer = createSlice({
       );
       console.log(productSearch);
     },
-    // filterCategory: (state, { payload }) => {
-    //   state.products=state.productContainer.filter(( ))
-    // },
+    filterCategory: (state, { payload }) => {
+      console.log(payload);
+      state.products = state.productContainer.filter((prod) => {
+        return prod.category == payload;
+      });
+    },
   },
 
   extraReducers: {
@@ -32,7 +35,6 @@ const productReducer = createSlice({
       state.loading = true;
     },
     [getProducts.fulfilled]: (state, { payload }) => {
-      console.log("payload", payload);
       state.loading = false;
       state.products = payload;
       state.productContainer = payload;
@@ -47,5 +49,5 @@ const productReducer = createSlice({
     },
   },
 });
-export const { productSearch } = productReducer.actions;
+export const { productSearch, filterCategory } = productReducer.actions;
 export default productReducer.reducer;

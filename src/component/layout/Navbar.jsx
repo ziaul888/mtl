@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../asset/scss/navbar.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { reactLocalStorage } from "reactjs-localstorage";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { productSearch } from "../../feature/ProductReducer";
 import { FaCartArrowDown, FaUserCircle } from "react-icons/fa";
@@ -11,19 +10,18 @@ import { FaCartArrowDown, FaUserCircle } from "react-icons/fa";
 const Navbar = () => {
   const inputRef = useRef("");
   const cart = useSelector((state) => state.carts.cartItem);
-  const navigate = useNavigate();
-  // const [query, setQuery] = useState("");
   const dispatch = useDispatch();
 
   const handleSearch = () => {
     dispatch(productSearch(inputRef.current.value));
   };
+  useEffect(() => {}, [cart]);
 
   return (
     <>
       <nav className="navbar top-navbar navbar-expand-md sticky-top">
         <div className="container">
-          <a href="#">
+          <a href="">
             {/* <picture>
                 <source media="(min-width: 992px)" srcset="./img/Spl-992x50-992W.svg">
                 <source media="(min-width: 320px)" srcset="./img/Spl-992x50-992W.svg">
@@ -33,7 +31,7 @@ const Navbar = () => {
           <div className="nav-item-middle ">
             <div className="search--box d-flex">
               <input
-                classNameName="searchBox"
+                className="searchBox"
                 type="search"
                 placeholder="Search "
                 ref={inputRef}
@@ -62,22 +60,15 @@ const Navbar = () => {
           </div>
           <div className="nav-item-right ">
             <ul className="navbar-nav right-nav mx-auto">
-              <li
-                className="nav-item "
-                onClick={() =>
-                  reactLocalStorage.get("token")
-                    ? navigate("/cart")
-                    : navigate("/login")
-                }
-              >
-                <a href="">
+              <li className="nav-item ">
+                <Link to={reactLocalStorage.get("token") ? "/cart" : "/login"}>
                   <i className="fas fa-heart">
                     <FaCartArrowDown />
                   </i>
                   <span className="count">
                     <span>{cart.length}</span>
                   </span>
-                </a>
+                </Link>
               </li>
               <li className="nav-item ">
                 <Link to="/login">

@@ -1,0 +1,140 @@
+.cart-item {
+  max-width: 700px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #c5c2c2;
+
+  .orderedProducts {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid #ebebeb;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    background-color: #c5c2c2;
+    margin-top: 30px;
+
+    &:last-child {
+      margin-bottom: 30px;
+    }
+
+    > div {
+      flex-grow: 1;
+      padding-left: 5px;
+
+      &:first-child {
+        padding-left: 0;
+      }
+    }
+
+    &_quantity {
+      align-self: center;
+      padding-top: 0;
+      text-align: center;
+      width: 30px;
+
+      .caret {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+        color: #aaa;
+        cursor: pointer;
+        opacity: 0.5;
+        width: 100%;
+        user-select: none;
+        transition: all 0.3s ease-in-out;
+
+        &::before {
+          border-top: 1px solid #535353;
+          border-left: 1px solid #535353;
+          content: "";
+          display: block;
+          height: 8px;
+          width: 8px;
+          transform: rotate(45deg);
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &.caret-down {
+          &::before {
+            transform: rotate(-135deg);
+          }
+        }
+
+        &.disabled {
+          cursor: default;
+          opacity: 0.2;
+        }
+      }
+    }
+
+    &_img {
+      font-size: 10px;
+      line-height: 10px;
+      overflow: hidden;
+      max-height: 80px;
+      text-align: center;
+      width: 80px;
+
+      img {
+        max-width: 60px;
+        max-height: 60px;
+      }
+    }
+
+    &_name {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 14px;
+      width: 145px;
+      margin-left: 20px;
+
+      .subText {
+        color: #9a9999;
+        font-size: 16px;
+        font-weight: 700;
+        margin-top: 3px;
+
+        span {
+          font-size: 16px;
+          margin-right: 3px;
+        }
+      }
+    }
+
+    &_amount {
+      font-size: 16px;
+      line-height: 14px;
+      width: 75px;
+
+      span {
+        font-size: 16px;
+        margin-right: 3px;
+      }
+
+      &_discount {
+        color: #de1311;
+      }
+
+      &_total {
+        text-decoration: line-through;
+      }
+    }
+
+    &_remove {
+      color: #999;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 20px;
+      margin-right: 10px;
+
+      &:hover {
+        color: #de1311;
+      }
+    }
+  }
+}
